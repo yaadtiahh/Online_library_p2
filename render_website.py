@@ -1,6 +1,7 @@
 import json
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server, shell
+from more_itertools import chunked
 
 
 def on_reload(): # Рендерит template.html в index.html и сохраняет новый файл.
@@ -13,9 +14,10 @@ def on_reload(): # Рендерит template.html в index.html и сохран�
     with open("books.json", encoding="utf8") as my_file:
         books_json = my_file.read()
     books = json.loads(books_json) # достаю информацию о книгах.
+    separated_books = list(chunked(books, 2)) # делит books 
 
     rendered_page = template.render(  # рендеринг template.html.
-        books = books
+        separated_books = separated_books
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
