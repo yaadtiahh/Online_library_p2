@@ -1,8 +1,9 @@
 import json
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-from livereload import Server, shell
-from more_itertools import chunked
 import os
+from math import ceil
+from livereload import Server, shell
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+from more_itertools import chunked
 
 
 def on_reload(): # Рендерит template.html в index.html и сохраняет новый файл.
@@ -19,7 +20,9 @@ def on_reload(): # Рендерит template.html в index.html и сохран�
 
     for i, book_page in enumerate(books_pages):
         separated_books = list(chunked(book_page, 2)) # делит books 
-
+        
+        #num_of_pages = book_page/i # кол-во страниц
+        print(i, book_page)
         rendered_page = template.render(  # рендеринг template.html.
             separated_books = separated_books
         )
