@@ -38,4 +38,4 @@ on_reload()
 
 server = Server() # Создание сервера
 server.watch('template.html', on_reload) # Команда которая следит за изменениями в файлах и после каждого изменения запускает консольную программу.
-server.serve(root='.') # Запуск сервера.
+server.serve(root='.', default_filename="pages/index1.html") # Запуск сервера.
