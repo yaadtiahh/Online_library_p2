@@ -13,12 +13,14 @@ def on_reload():
     template = env.get_template('template.html') 
 
     with open("books.json", encoding="utf8") as my_file:
-        books = json.load(my_file) 
-    books_pages = list(chunked(books, 20))
+        books = json.load(my_file)
+    books_pages_limit = 20
+    books_pages = list(chunked(books, books_pages_limit))
     pages_count = len(books_pages)
 
-    for num, book_page in enumerate(books_pages): 
-        separated_books = list(chunked(book_page, 2)) 
+    for num, book_page in enumerate(books_pages):
+        books_row_limit = 2
+        separated_books = list(chunked(book_page, books_row_limit)) 
         page_number = num + 1
 
         rendered_page = template.render( 
