@@ -18,10 +18,10 @@ def on_reload():
     books_pages = list(chunked(books, books_pages_limit))
     pages_count = len(books_pages)
 
-    for num, book_page in enumerate(books_pages):
+    for index, book_page in enumerate(books_pages):
         books_row_limit = 2
         separated_books = list(chunked(book_page, books_row_limit)) 
-        page_number = num + 1
+        page_number = index + 1
 
         rendered_page = template.render( 
             separated_books = separated_books,
