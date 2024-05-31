@@ -13,14 +13,13 @@ def on_reload():
     template = env.get_template('template.html') 
 
     with open("books.json", encoding="utf8") as my_file:
-        books_json = my_file.read()
-    books = json.loads(books_json) 
+        books = json.load(my_file) 
     books_pages = list(chunked(books, 20))
     pages_count = len(books_pages)
 
-    for i, book_page in enumerate(books_pages): 
+    for num, book_page in enumerate(books_pages): 
         separated_books = list(chunked(book_page, 2)) 
-        page_number = i+1
+        page_number = num + 1
 
         rendered_page = template.render( 
             separated_books = separated_books,
@@ -32,9 +31,14 @@ def on_reload():
             file.write(rendered_page)
 
 
-os.makedirs("pages", exist_ok=True)
-on_reload()
+def main():
+    os.makedirs("pages", exist_ok=True)
+    on_reload()
 
-server = Server()
-server.watch('template.html', on_reload)
-server.serve(root='.', default_filename="pages/index1.html")
+    server = Server()
+    server.watch('template.html', on_reload)
+    server.serve(root='.', default_filename="pages/index1.html")
+
+
+if __name__ == '__main__':
+    main()
