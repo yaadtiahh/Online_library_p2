@@ -12,7 +12,7 @@ def on_reload():
     )
     template = env.get_template('template.html') 
 
-    with open("books.json", encoding="utf8") as my_file:
+    with open("static/books.json", encoding="utf8") as my_file:
         books = json.load(my_file)
     books_pages_limit = 20
     books_pages = list(chunked(books, books_pages_limit))
