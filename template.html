@@ -52,14 +52,14 @@
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                   <div class="col-md-4">
-                    <img src="../media/{{book.img_src}}" class="card-img" alt="Изображение книги">
+                    <img src="../media/{{book.img_src | urlencode}}" class="card-img" alt="Изображение книги">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title">{{book.name}}</h5>
                       <p class="card-text">{{book.author}}</p>
                       <h6><span class="badge badge-light">{{book.genres[0]}}</span> <span class="badge badge-light">{{book.genres[1]}}</span></h6>
-                      <a href="../media/{{book.book_path}}" target="blank">Читать</a>
+                      <a href="../media/{{book.book_path | urlencode}}" target="blank">Читать</a>
                     </div>
                   </div>
                 </div>
