@@ -6,7 +6,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
 
 
-def on_reload(): 
+def on_reload():
     parser = argparse.ArgumentParser(
         description='Запускает сервер для сайта с книгами'
     )
@@ -17,7 +17,7 @@ def on_reload():
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
-    template = env.get_template('template.html') 
+    template = env.get_template('template.html')
 
     with open(args.file_path, encoding="utf8") as my_file:
         books = json.load(my_file)
@@ -27,12 +27,12 @@ def on_reload():
 
     for page_number, book_page in enumerate(books_pages, 1):
         books_row_limit = 2
-        separated_books = list(chunked(book_page, books_row_limit)) 
+        separated_books = list(chunked(book_page, books_row_limit))
 
-        rendered_page = template.render( 
-            separated_books = separated_books,
-            pages_count = pages_count,
-            page_number = page_number
+        rendered_page = template.render(
+            separated_books=separated_books,
+            pages_count=pages_count,
+            page_number=page_number
         )
 
         with open(f'pages/index{page_number}.html', 'w', encoding="utf8") as file:
