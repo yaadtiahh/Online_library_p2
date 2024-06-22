@@ -6,18 +6,18 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
 
 
-def on_reload(): 
+def on_reload():
     parser = argparse.ArgumentParser(
-        description='Запускает сервер для сайта с книгами'
+        description="Запускает сервер для сайта с книгами"
     )
-    parser.add_argument('--file_path', help="Ваш путь до json файла", default="static/books.json")
+    parser.add_argument("--file_path", help="Ваш путь до json файла", default="static/books.json")
     args = parser.parse_args()
 
     env = Environment(
-        loader=FileSystemLoader('.'),
-        autoescape=select_autoescape(['html', 'xml'])
+        loader=FileSystemLoader("."),
+        autoescape=select_autoescape(["html", "xml"])
     )
-    template = env.get_template('template.html') 
+    template = env.get_template("template.html") 
 
     with open(args.file_path, encoding="utf8") as my_file:
         books = json.load(my_file)
@@ -35,7 +35,7 @@ def on_reload():
             page_number = page_number
         )
 
-        with open(f'pages/index{page_number}.html', 'w', encoding="utf8") as file:
+        with open(f"pages/index{page_number}.html", "w", encoding="utf8") as file:
             file.write(rendered_page)
 
 
@@ -44,8 +44,8 @@ def main():
     on_reload()
 
     server = Server()
-    server.watch('template.html', on_reload)
-    server.serve(root='.', default_filename="pages/index1.html")
+    server.watch("template.html", on_reload)
+    server.serve(root=".", default_filename="pages/index1.html")
 
 
 if __name__ == '__main__':
