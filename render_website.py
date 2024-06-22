@@ -27,12 +27,12 @@ def on_reload():
 
     for page_number, book_page in enumerate(books_pages, 1):
         books_row_limit = 2
-        separated_books = list(chunked(book_page, books_row_limit)) 
+        separated_books = list(chunked(book_page, books_row_limit))
 
-        rendered_page = template.render( 
-            separated_books = separated_books,
-            pages_count = pages_count,
-            page_number = page_number
+        rendered_page = template.render(
+            separated_books=separated_books,
+            pages_count=pages_count,
+            page_number=page_number
         )
 
         with open(f"pages/index{page_number}.html", "w", encoding="utf8") as file:
